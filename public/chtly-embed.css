@@ -34,7 +34,7 @@
 }
 
 .chtly__comment .top .avatar {
-  color: #f0f0f0;
+  color: #444;
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -45,7 +45,7 @@
 
 .chtly__comment .top .avatar img {
   border-radius: 9999px;
-  border: 2px solid #777;
+  border: 2px solid #ccc;
 }
 
 .chtly__comment .top .timedate {
@@ -55,9 +55,9 @@
 
 .chtly__comment .comment {
   display: flex;
-  color: #bdbdbd;
+  color: #111;
   font-size: 18px;
-  background: #444;
+  background: #ccc;
   padding: .4rem;
   white-space: break-spaces;
   border-radius: .5rem;
@@ -145,9 +145,22 @@
   .chtly__hr {
     border-bottom: 1px solid #333;
   }
-
+  
   .chtly__comment {
     background: #343434;
+  }
+
+  .chtly__comment .top .avatar {
+    color: #f0f0f0;
+  }
+
+  .chtly__comment .top .avatar img {
+    border: 2px solid #777;
+  }
+  
+  .chtly__comment .comment {
+    color: #bdbdbd;
+    background: #444;
   }
 
   .chtly__commentContainer textarea {
