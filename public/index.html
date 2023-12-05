@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 4rem;
+      background-color: #121223;
+      height: 100vh;
+      max-width: 100vw;
+    }
+
+    .card {
+      background-color: #222233;
+      border: 1px solid #333334;
+      border-radius: .5rem;
+      padding: .5rem;
+      max-width: 50rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div id="chtly__container"></div>
+  </div>
+</body>
+
+<script src="http://localhost:3000/chtly-embed.js" type="module" data-backend="http://localhost:3000"
+  data-post="testing" debug defer></script>
+
+</html>
