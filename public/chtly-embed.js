@@ -52,13 +52,11 @@ const init = (async () => {
     console.error(`Failed to load comments for post ${postId}`)
     return;
   }
-  console.log(comments);
   log(`Successfully loaded comments for post ${postId}`);
 
   log(`Adding custom styles...`);
   const styleUrl = scriptUrl.startsWith("/") ? "/chtly-embed.css" : scriptUrl.replace(/.js/, ".css");
   $(`<link rel="stylesheet" href="${styleUrl}">`).appendTo($("head"));
-  console.log(styleUrl);
 
   $(`<p>${JSON.stringify(comments)}</p>`).appendTo(chtly);
 
