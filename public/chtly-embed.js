@@ -58,6 +58,10 @@ const init = (async () => {
   const styleUrl = scriptUrl.startsWith("/") ? "/chtly-embed.css" : scriptUrl.replace(/.js/, ".css");
   $(`<link rel="stylesheet" href="${styleUrl}">`).appendTo($("head"));
 
+  const commentContainer = $(`<div class="chtly__commentContainer"></div>`)
+  const textArea = $(`<textarea></textarea>`);
+  textArea.appendTo(commentContainer);
+  commentContainer.appendTo(chtly);
   $(`<p>${JSON.stringify(comments)}</p>`).appendTo(chtly);
 
 });
