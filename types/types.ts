@@ -1,6 +1,6 @@
 export type PostObject = {
   id: string;
-  parentId: string;
+  parentId: string | undefined;
   post: string;
   user: string;
   comment: string;
