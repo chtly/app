@@ -7,17 +7,31 @@ const database = new SQLite3DB("posts.db");
 database.pragma("journal_mode = WAL");
 database.exec("CREATE TABLE IF NOT EXISTS posts (id VARCHAR, parentId VARCHAR, post VARCHAR, user VARCHAR, comment VARCHAR, date DATETIME);")
 
-export const addPost = (post: string, user: string, comment: string, parentPost?: string | undefined): boolean => {
-  const insert = database.prepare("INSERT INTO posts (id, parentId, post, user, comment, date) VALUES (@id, @parentId, @post, @user, @comment, @date)").run({
+export const addPost = (post: string, user: string, comment: string, parentPost?: string | undefined): {
+  success: boolean;
+  post?: PostObject;
+} => {
+  const postObject: PostObject = {
     id: uuid(),
-    parentId: parentPost ? parentPost : "",
+    parentId: parentPost,
     post: post,
     user: user,
     comment: comment,
-    date: new Date().getTime()
+    date: new Date()
+  }
+  const insert = database.prepare("INSERT INTO posts (id, parentId, post, user, comment, date) VALUES (@id, @parentId, @post, @user, @comment, @date)").run({
+    id: uuid(),
+    parentId: postObject.parentId ? postObject.parentId : "",
+    post: postObject.post,
+    user: postObject.user,
+    comment: postObject.comment,
+    date: postObject.date.getTime()
   });
 
-  return insert.changes > 0
+  return {
+    success: insert.changes > 0,
+    post: insert.changes > 0 ? postObject : undefined
+  }
 }
 
 export const getPosts = (post: string): PostObject[] => {
