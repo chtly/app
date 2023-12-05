@@ -1,17 +1,17 @@
 import SQLite3DB from 'better-sqlite3';
 import { v4 as uuid } from 'uuid';
-import { PostObject } from '../types/types';
+import { CommentObject } from '../types/types';
 
 const database = new SQLite3DB("posts.db");
 
 database.pragma("journal_mode = WAL");
 database.exec("CREATE TABLE IF NOT EXISTS posts (commentId VARCHAR, parentCommentId VARCHAR, post VARCHAR, user VARCHAR, comment VARCHAR, date DATETIME);")
 
-export const addPost = (post: string, user: string, commentContent: string, parentComment?: string | undefined): {
+export const addComment = (post: string, user: string, commentContent: string, parentComment?: string | undefined): {
   success: boolean;
-  post?: PostObject;
+  post?: CommentObject;
 } => {
-  const postObject: PostObject = {
+  const postObject: CommentObject = {
     commentId: uuid(),
     parentCommentId: parentComment,
     post: post,
@@ -34,7 +34,7 @@ export const addPost = (post: string, user: string, commentContent: string, pare
   }
 }
 
-export const getPosts = (post: string, amount?: number | undefined, offset?: number | undefined): PostObject[] => {
+export const getComments = (post: string, amount?: number | undefined, offset?: number | undefined): CommentObject[] => {
   const fetch = database.prepare(`SELECT * FROM posts WHERE post = @post ORDER BY date DESC LIMIT @offset, @amount`).all({ post, amount, offset });
-  return fetch as PostObject[];
+  return fetch as CommentObject[];
 }

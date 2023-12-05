@@ -1,4 +1,4 @@
-export type PostObject = {
+export type CommentObject = {
   commentId: string;
   parentCommentId: string | undefined;
   post: string;

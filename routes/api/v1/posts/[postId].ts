@@ -1,5 +1,5 @@
 import { H3Event } from "h3";
-import { addPost, getPosts } from "../../../../db/database";
+import { addComment, getComments } from "../../../../db/database";
 import assert from "assert";
 import { emojify } from 'node-emoji';
 import { ZodError, z } from 'zod';
@@ -15,7 +15,7 @@ export default eventHandler(async (e: H3Event) => {
       assert("user" in body, "key 'user' is missing");
       assert("comment" in body, "key 'comment' is missing");
 
-      const insert = addPost(e.context.params.postId as string, body.user, emojify(body.comment as string));
+      const insert = addComment(e.context.params.postId as string, body.user, emojify(body.comment as string));
       return insert;
     }
 
@@ -35,9 +35,9 @@ export default eventHandler(async (e: H3Event) => {
 
     console.log(queryParams);
 
-    const posts = getPosts(postId, postAmount, postOffset);
+    const comments = getComments(postId, postAmount, postOffset);
     return {
-      posts: posts
+      comments
     };
   } catch (err) {
     if (err instanceof ZodError) {
