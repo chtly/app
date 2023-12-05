@@ -34,7 +34,7 @@ export const addPost = (post: string, user: string, commentContent: string, pare
   }
 }
 
-export const getPosts = (post: string): PostObject[] => {
-  const fetch = database.prepare(`SELECT * FROM posts WHERE post = @post ORDER BY date DESC LIMIT 1000`).all({ post });
+export const getPosts = (post: string, amount?: number | undefined, offset?: number | undefined): PostObject[] => {
+  const fetch = database.prepare(`SELECT * FROM posts WHERE post = @post ORDER BY date DESC LIMIT @offset, @amount`).all({ post, amount, offset });
   return fetch as PostObject[];
 }
