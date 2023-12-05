@@ -19,7 +19,10 @@ export default eventHandler(async (e: H3Event) => {
     const postId = e.context.params.postId;
 
     const posts = getPosts(postId);
-    return posts;
+    return {
+      hasComments: posts.length > 0,
+      posts: posts
+    };
   } catch (err) {
     return {
       code: 500,
