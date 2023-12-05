@@ -31,7 +31,7 @@ const getAllComments = async () => {
 
 log(`Loading chtly embed for post "${postId}"...`);
 
-(async () => {
+const init = (async () => {
   const chtlyContainers = $("#chtly__container");
   if (chtlyContainers.length <= 0) {
     console.warn("chtly__container node not found!");
@@ -62,4 +62,6 @@ log(`Loading chtly embed for post "${postId}"...`);
 
   $(`<p>${JSON.stringify(comments)}</p>`).appendTo(chtly);
 
-})();
+});
+
+$(init);
