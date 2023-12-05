@@ -5,23 +5,23 @@ import { PostObject } from '../types/types';
 const database = new SQLite3DB("posts.db");
 
 database.pragma("journal_mode = WAL");
-database.exec("CREATE TABLE IF NOT EXISTS posts (id VARCHAR, parentId VARCHAR, post VARCHAR, user VARCHAR, comment VARCHAR, date DATETIME);")
+database.exec("CREATE TABLE IF NOT EXISTS posts (commentId VARCHAR, parentCommentId VARCHAR, post VARCHAR, user VARCHAR, comment VARCHAR, date DATETIME);")
 
-export const addPost = (post: string, user: string, comment: string, parentPost?: string | undefined): {
+export const addPost = (post: string, user: string, commentContent: string, parentComment?: string | undefined): {
   success: boolean;
   post?: PostObject;
 } => {
   const postObject: PostObject = {
-    id: uuid(),
-    parentId: parentPost,
+    commentId: uuid(),
+    parentCommentId: parentComment,
     post: post,
     user: user,
-    comment: comment,
+    comment: commentContent,
     date: new Date()
   }
-  const insert = database.prepare("INSERT INTO posts (id, parentId, post, user, comment, date) VALUES (@id, @parentId, @post, @user, @comment, @date)").run({
-    id: uuid(),
-    parentId: postObject.parentId ? postObject.parentId : "",
+  const insert = database.prepare("INSERT INTO posts (commentId, parentCommentId, post, user, comment, date) VALUES (@commentId, @parentCommentId, @post, @user, @comment, @date)").run({
+    commentId: uuid(),
+    parentCommentId: postObject.parentCommentId ? postObject.parentCommentId : "",
     post: postObject.post,
     user: postObject.user,
     comment: postObject.comment,
