@@ -9,9 +9,14 @@ chtly (pronounced chatly) is an open-source and freely accessible discussion pla
 ## TODO
 
 - [ ] Socials Authentication
+  - [ ] Discord
+  - [ ] Github
+  - [ ] Google
+  - [ ] X (Twitter)
 - [ ] Anonymous Commenting
 - [ ] Nested Comments
 - [ ] Markdown support
+- [x] Emoji Support
 - [ ] Up-/Down Voting
 - [ ] Community Moderation
 
