@@ -32,14 +32,15 @@ const getAllComments = async () => {
 
 log(`Loading chtly embed for post "${postId}"...`);
 
-const addComment = (container, comment) => {
+const addComment = (container, comment, prepend = false) => {
   const commentNode = $(`<div class="chtly__comment" />`);
   const commentNodeTop = $(`<div class="top" />`);
   $(`<div class="avatar"><img src="./anon.webp" height="30" width="30"></img>${comment.user}</div>`).appendTo(commentNodeTop);
   $(`<p class="timedate">${moment(comment.date).fromNow()}</p>`).appendTo(commentNodeTop);
   commentNodeTop.appendTo(commentNode);
   $(`<div class="comment">${comment.comment}</p>`).appendTo(commentNode);
-  commentNode.appendTo(container);
+  if (prepend) commentNode.prependTo(container);
+  else commentNode.appendTo(container);
 };
 
 const loadAndRenderComments = async (commentsContainer) => {
@@ -71,7 +72,7 @@ const init = async () => {
     return;
   }
   log("Successfully connected to chtly backend!");
-  
+
 
 
   log(`Adding custom styles...`);
@@ -107,9 +108,9 @@ const init = async () => {
 
   postButton[0].addEventListener("click", async () => {
     const textLength = textArea.val().length;
-    if(textLength <= 0)
+    if (textLength <= 0)
       return;
-    
+
     if (textLength > 2000) {
       alert("Your comment has too many characters.");
       return;
@@ -126,35 +127,14 @@ const init = async () => {
         "Content-Type": "application/json"
       }
     });
-    if(newComment.ok){
+    if (newComment.ok) {
       const callback = await newComment.json();
-      if(!("success" in callback) || !callback.success){
+      if (!("success" in callback) || !callback.success) {
         alert("There was an error while processing your comment.");
         console.error(callback);
-      } else loadAndRenderComments(commentsContainer);
+      } else addComment(commentsContainer, callback.comment, true);
     }
   });
-
-
-/*   addComment(commentsContainer, {
-    commentId: "someuuid",
-    parentCommentId: undefined,
-    post: "testing",
-    user: "test",
-    comment:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
-    date: Date.now(),
-  });
-
-  addComment(commentsContainer, {
-    commentId: "someuuid",
-    parentCommentId: undefined,
-    post: "testing",
-    user: "test",
-    comment:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.",
-    date: Date.now(),
-  }); */
 };
 
 $(init);
