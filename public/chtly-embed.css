@@ -25,7 +25,7 @@
   background: #ddd;
   border-radius: .5rem;
 
-  animation: flyIn .5s ease;
+  animation: scaleIn .35s ease;
 }
 
 .chtly__comment .top {
@@ -89,7 +89,7 @@
 }
 
 .chtly__commentContainer .chtly__toolbar {
-  margin-top: 20px;
+  margin-top: 5px;
 }
 
 .chtly__commentContainer .chtly__toolbar .chtly__charCounter {
@@ -101,7 +101,7 @@
   transition: color .5s ease-in-out, background .5s ease-in-out;
   position: static;
   right: 0;
-  translate: -5px -57px;
+  translate: -5px -41px;
 
   pointer-events: none;
 
@@ -134,7 +134,7 @@
 
   transition: scale .2s cubic-bezier(0.47, 0, 0.745, 0.715);
 
-  display: initial;
+  display: inline-block;
 }
 
 .chtly__commentContainer .chtly__toolbar .chtly__postButton:hover {
@@ -175,6 +175,10 @@
     border-radius: .5rem;
   }
 
+  .chtly__commentContainer textarea:focus {
+    border-color: #343434;
+  }
+
   .chtly__commentContainer .chtly__toolbar .chtly__charCounter {
     color: #777;
     background: #444;
@@ -192,13 +196,13 @@
 
 }
 
-@keyframes flyIn {
+@keyframes scaleIn {
   0%{
     opacity: 0;
-    translate: 10px 0;
+    scale: 0.98;
   }
   100%{
     opacity: 1;
-    translate: 0 0;
+    scale: 1;
   }
 }
