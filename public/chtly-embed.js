@@ -36,7 +36,7 @@ const addComment = (container, comment, prepend = false) => {
   const commentNode = $(`<div class="chtly__comment" />`);
   const commentNodeTop = $(`<div class="top" />`);
   $(`<div class="avatar"><img src="./anon.webp" height="30" width="30"></img>${comment.user}</div>`).appendTo(commentNodeTop);
-  $(`<p class="timedate">${moment(comment.date).fromNow()}</p>`).appendTo(commentNodeTop);
+  $(`<p class="timedate" title="${moment(comment.date).format()}">${moment(comment.date).fromNow()}</p>`).appendTo(commentNodeTop);
   commentNodeTop.appendTo(commentNode);
   $(`<div class="comment">${comment.comment}</p>`).appendTo(commentNode);
   if (prepend) commentNode.prependTo(container);
