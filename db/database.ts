@@ -9,7 +9,7 @@ database.exec("CREATE TABLE IF NOT EXISTS posts (commentId VARCHAR, parentCommen
 
 export const addComment = (post: string, user: string, commentContent: string, parentComment?: string | undefined): {
   success: boolean;
-  post?: CommentObject;
+  comment?: CommentObject;
 } => {
   const postObject: CommentObject = {
     commentId: uuid(),
@@ -30,7 +30,7 @@ export const addComment = (post: string, user: string, commentContent: string, p
 
   return {
     success: insert.changes > 0,
-    post: insert.changes > 0 ? postObject : undefined
+    comment: insert.changes > 0 ? postObject : undefined
   }
 }
 
