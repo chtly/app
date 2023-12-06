@@ -100,6 +100,8 @@
   right: 0;
   translate: -5px -57px;
 
+  pointer-events: none;
+
   opacity: 0.75;
 }
 
@@ -145,7 +147,7 @@
   .chtly__hr {
     border-bottom: 1px solid #333;
   }
-  
+
   .chtly__comment {
     background: #343434;
   }
@@ -157,7 +159,7 @@
   .chtly__comment .top .avatar img {
     border: 2px solid #777;
   }
-  
+
   .chtly__comment .comment {
     color: #bdbdbd;
     background: #444;
