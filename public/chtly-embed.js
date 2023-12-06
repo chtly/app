@@ -132,7 +132,10 @@ const init = async () => {
       if (!("success" in callback) || !callback.success) {
         alert("There was an error while processing your comment.");
         console.error(callback);
-      } else addComment(commentsContainer, callback.comment, true);
+      } else {
+        textArea.val("");
+        addComment(commentsContainer, callback.comment, true);
+      }
     }
   });
 };
