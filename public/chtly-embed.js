@@ -38,7 +38,9 @@ const addComment = (container, comment, prepend = false) => {
   $(`<div class="avatar"><img src="./anon.webp" height="30" width="30"></img>${comment.user}</div>`).appendTo(commentNodeTop);
   $(`<p class="timedate" title="${moment(comment.date).format()}">${moment(comment.date).fromNow()}</p>`).appendTo(commentNodeTop);
   commentNodeTop.appendTo(commentNode);
-  $(`<div class="comment">${comment.comment}</p>`).appendTo(commentNode);
+  const commentText = $(`<div class="comment" />`)
+  commentText.text(comment.comment);
+  commentText.appendTo(commentNode);
   if (prepend) commentNode.prependTo(container);
   else commentNode.appendTo(container);
 };
